@@ -187,7 +187,12 @@
                     <button type="submit" class="button" id="loginButton">
                         <span class="button__text">login</span>
                     </button>
-                
+                    <button type="button" class="button" id="deployButton">
+                        <span class="button__text">Deploy to Netlify</span>
+                    </button>
+                    <button type="button" class="button" id="telechargerButton">
+                        <span class="button__text">Télécharger</span>
+                    </button>
                 </div>
                 <div id="errorMessage" class="error-message"></div>
             </form>
@@ -200,6 +205,69 @@
         </div>
     </div>
 </div>
+
+<script>
+    function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (username === 'omar' && password === 'omar123') {
+            window.location.href = 'data.html';
+        } else {
+            errorMessage.textContent = 'Incorrect username or password';
+        }
+    }
+
+    document.getElementById('loginButton').addEventListener('click', handleLogin);
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+
+    // Clear input fields on page load
+    window.onload = function() {
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    };
+
+    async function deployToNetlify() {
+        const url = 'https://api.netlify.com/api/v1/sites/shimmering-platypus-e14aea/deploys';
+        const accessToken = 'nfp_HXsb4rWTTgjNwa1JDSLPJ9TjuD9r9qLA4b77';
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify({
+                    title: "New Deploy",
+                    description: "Deploying from the app"
+                })
+            });
+
+            if (response.ok) {
+                console.log('Deployment successful!');
+                alert('Deployment successful!');
+            } else {
+                console.error('Deployment failed:', response.statusText);
+                alert('Deployment failed: ' + response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Error: ' + error.message);
+        }
+    }
+
+    document.getElementById('deployButton').addEventListener('click', deployToNetlify);
+
+    // Handle the "Télécharger" button click
+    document.getElementById('telechargerButton').addEventListener('click', function() {
+        window.location.href = 'telecharger.html';
+    });
+</script>
+</body>
+</html>
 
 <script>
     function handleLogin(event) {
