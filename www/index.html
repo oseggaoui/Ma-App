@@ -190,9 +190,6 @@
                     <button type="button" class="button" id="deployButton">
                         <span class="button__text">Deploy to Netlify</span>
                     </button>
-                    <button type="button" class="button" id="telechargerButton">
-                        <span class="button__text">Télécharger</span>
-                    </button>
                 </div>
                 <div id="errorMessage" class="error-message"></div>
             </form>
@@ -260,42 +257,6 @@
     }
 
     document.getElementById('deployButton').addEventListener('click', deployToNetlify);
-
-    // Handle the "Télécharger" button click
-    document.getElementById('telechargerButton').addEventListener('click', function() {
-        window.location.href = 'telecharger.html';
-    });
-</script>
-</body>
-</html>
-
-<script>
-    function handleLogin(event) {
-        event.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const errorMessage = document.getElementById('errorMessage');
-
-        if (username === 'omar' && password === 'omar123') {
-            window.location.href = 'data.html';
-        } else {
-            errorMessage.textContent = 'Incorrect username or password';
-        }
-    }
-
-    document.getElementById('loginButton').addEventListener('click', handleLogin);
-    document.getElementById('loginForm').addEventListener('submit', handleLogin);
-
-    // Clear input fields on page load
-    window.onload = function() {
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-    };
-
-    // Handle the "Télécharger" button click
-    document.getElementById('telechargerButton').addEventListener('click', function() {
-        window.location.href = 'telecharger.html';
-    });
 </script>
 </body>
 </html>
