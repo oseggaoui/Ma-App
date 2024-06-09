@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Raleway, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(90deg, #fff, #fff);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .screen {
+            background: linear-gradient(90deg, #12c2e9, #12c2e9);
+            position: relative;
+            height: 600px;
+            width: 360px;
+            box-shadow: 0px 0px 24px;
+        }
+
+        .screen__content {
+            z-index: 1;
+            position: relative;
+            height: 100%;
+        }
+
+        .screen__background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+        }
+
+        .screen__background__shape {
+            transform: rotate(45deg);
+            position: absolute;
+        }
+
+        .screen__background__shape1 {
+            height: 520px;
+            width: 520px;
+            background: #fff;
+            top: -50px;
+            right: 120px;
+            border-radius: 0 72px 0 0;
+        }
+
+        .screen__background__shape2 {
+            height: 220px;
+            width: 220px;
+            background: #f64f59;
+            top: -172px;
+            right: 0;
+            border-radius: 32px;
+        }
+
+        .screen__background__shape3 {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(270deg, #12c2e9, #12c2e9);
+            top: -24px;
+            right: 0;
+            border-radius: 32px;
+        }
+
+        .screen__background__shape4 {
+            height: 400px;
+            width: 200px;
+            background: #f64f59;
+            top: 420px;
+            right: 50px;
+            border-radius: 60px;
+        }
+
+        .login {
+            width: 320px;
+            padding: 30px;
+            padding-top: 110px; /* Updated padding */
+        }
+
+        .login__field {
+            padding: 20px 0px;
+            position: relative;
+        }
+
+        .login__input {
+            border: none;
+            border-bottom: 2px solid #000000;
+            background: none;
+            padding: 10px;
+            padding-left: 24px;
+            font-weight: 700;
+            width: 75%;
+            transition: .2s;
+        }
+
+        .login__input:active,
+        .login__input:focus,
+        .login__input:hover {
+            outline: none;
+            border-bottom-color: #000000;
+        }
+
+        .login__input::placeholder {
+            color: #000000;
+        }
+
+        .button {
+            background: #6DD5FA;
+            font-size: 14px;
+            margin-top: 30px;
+            padding: 16px 20px;
+            border-radius: 26px;
+            border: 1px solid;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%; /* Width of each button */
+            color: #000000;
+            box-shadow: 0px 2px 2px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .button:active,
+        .button:focus,
+        .button:hover {
+            border-color: #6A679E;
+            outline: none;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between; /* Space between buttons */
+            gap: 20px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 40px; /* Updated top position */
+            left: 40px; /* Updated left position */
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login" id="loginForm">
+                <img src="image/MA_APP.png" alt="MAA APP Logo" class="logo" style="width: 100px; height: 80px;">
+                <div class="login__field">
+                    <input type="text" id="username" class="login__input" placeholder="username">
+                </div>
+                <div class="login__field">
+                    <input type="password" id="password" class="login__input" placeholder="password">
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="button" id="loginButton">
+                        <span class="button__text">login</span>
+                    </button>
+                
+                </div>
+                <div id="errorMessage" class="error-message"></div>
+            </form>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+    function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+        const errorMessage = document.getElementById('errorMessage');
+
+        if (username === 'omar' && password === 'omar123') {
+            window.location.href = 'data.html';
+        } else {
+            errorMessage.textContent = 'Incorrect username or password';
+        }
+    }
+
+    document.getElementById('loginButton').addEventListener('click', handleLogin);
+    document.getElementById('loginForm').addEventListener('submit', handleLogin);
+
+    // Clear input fields on page load
+    window.onload = function() {
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+    };
+
+    // Handle the "Télécharger" button click
+    document.getElementById('telechargerButton').addEventListener('click', function() {
+        window.location.href = 'telecharger.html';
+    });
+</script>
+</body>
+</html>

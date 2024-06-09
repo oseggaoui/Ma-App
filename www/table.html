@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Page</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Raleway, sans-serif;
+        }
+        body {
+            background: linear-gradient(90deg, #fff, #fff);
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .screen {
+            background: linear-gradient(90deg, #12c2e9, #12c2e9);
+            position: relative;
+            height: 700px;
+            width: 360px;
+            box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .screen__content {
+            z-index: 1;
+            position: relative;
+            height: 100%;
+            padding-top: 150px; /* Adjusted padding */
+        }
+        .screen__background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            -webkit-clip-path: inset(0 0 0 0);
+            clip-path: inset(0 0 0 0);
+        }
+        .screen_background_shape {
+            transform: rotate(45deg);
+            position: absolute;
+        }
+        .screen_background_shape1 {
+            height: 520px;
+            width: 520px;
+            background: #fff;
+            top: -50px;
+            right: 120px;
+            border-radius: 0 72px 0 0;
+        }
+        .screen_background_shape2 {
+            height: 220px;
+            width: 220px;
+            background: #f64f59;
+            top: -172px;
+            right: 0;
+            border-radius: 32px;
+        }
+        .screen_background_shape3 {
+            height: 540px;
+            width: 190px;
+            background: linear-gradient(270deg, #12c2e9, #12c2e9);
+            top: -24px;
+            right: 0;
+            border-radius: 32px;
+        }
+        .screen_background_shape4 {
+            height: 400px;
+            width: 200px;
+            background: #f64f59;
+            top: 420px;
+            right: 50px;
+            border-radius: 60px;
+        }
+        .login {
+            width: 320px;
+            padding: 30px;
+            padding-top: 110px; /* Adjusted padding */
+        }
+        .login__field {
+            padding: 20px 0px;
+            position: relative;
+        }
+        .login__input {
+            border: none;
+            border-bottom: 2px solid #000000;
+            background: none;
+            padding: 10px;
+            padding-left: 24px;
+            font-weight: 700;
+            width: 75%;
+            transition: .2s;
+        }
+        .login__input:active,
+        .login__input:focus,
+        .login__input:hover {
+            outline: none;
+            border-bottom-color: #000000;
+        }
+        .login__input::placeholder {
+            color: #000000;
+        }
+        .button-group {
+            position: absolute;
+            bottom: 80px; /* Adjusted position */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: space-between;
+            gap: 60px;
+        }
+        .button {
+            background: #6DD5FA;
+            font-size: 14px;
+            padding: 16px 20px;
+            border-radius: 26px;
+            border: 1px solid;
+            text-transform: uppercase;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48%;
+            color: #000000;
+            box-shadow: 0px 2px 2px;
+            cursor: pointer;
+            transition: .2s;
+        }
+        .button:active,
+        .button:focus,
+        .button:hover {
+            border-color: #6A679E;
+            outline: none;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            overflow: hidden;
+            box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.2);
+        }
+        th, td {
+            padding: 4px 8px;
+            border: 1px solid #000000;
+            text-align: center;
+            font-size: 12px;
+        }
+        th {
+            background-color: #12c2e9;
+            color: white;
+        }
+        .clear-text {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            bottom: 30px;
+            left: 20px;
+        }
+        .final-page-container {
+            display: none;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        .left-text, .right-text {
+            flex: 1;
+        }
+        #additional-text {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #additional-text p strong u {
+            text-decoration: underline;
+        }
+        #additional-text p {
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <img src="image/MA_APP.png" alt="MAA APP Logo" class="logo" style="width: 100px; height: 80px;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom & Prénom</th>
+                        <th>CIN</th>
+                        <th>Date</th>
+                        <th>Heure</th>
+                        <th>Observations</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                    <!-- Data rows will be inserted here via JavaScript -->
+                </tbody>
+            </table>
+            <div class="button-group">
+                <a href="./data.html" style="text-decoration: none; display: contents;">
+                    <button type="button" class="button" id="retourButton">
+                        <span class="button__text">Retour</span>
+                    </button>
+                </a>
+                <button type="button" class="button" id="telechargerButton">
+                    <span class="button__text">Télécharger</span>
+                </button>
+            </div>
+            <span class="clear-text" id="clearTable">vider le tableau</span>
+        </div>
+        <div class="screen__background">
+            <span class="screen_background_shape screen_background_shape4"></span>
+            <span class="screen_background_shape screen_background_shape3"></span>
+            <span class="screen_background_shape screen_background_shape2"></span>
+            <span class="screen_background_shape screen_background_shape1"></span>
+        </div>
+    </div>
+</div>
+<div class="final-page-container">
+    <div class="header">
+        <div class="left-text">
+            <p>Royaume Du Maroc<br>
+            Ministère De L'intérieur<br>
+            Wilaya région de Draa-Tafilalet<br>
+            Province D'Er-Rachidia<br>
+            Pachalik D'Er-Rachidia<br>
+            4 éme Annexe Administrative<br>
+            <br> <!-- Empty line -->
+            N° 323... /DAI<br><br> <!-- Two empty lines added -->
+            </p>
+        </div>
+        <div class="right-text">
+            <p id="date-location-text">Er-Rachidia : </p>
+        </div>
+    </div>
+    <div id="additional-text">
+        <p><strong><u>MONSIEUR LE CAÏD CHEF 4éme ANNEXE ADMINISTRATIVE</u></strong><br>
+        <strong><u>OULED EL HAJ</u></strong><br>
+        <strong><u>A</u></strong><br>
+        <strong><u>MONSIEUR LE PACHA DE LA VILLE D'ERRACHIDIA</u></strong></p>
+        <p>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp; Suite à votre message n "300 du 23/04/2024 concernant la situation des registres (Dossiers déposés) stop.<br>
+        Honneur vous rendre compte les renseignements demandé du 06/05/2024 stop à savoir stop.</p>
+    </div>
+</div>
+<!-- Include jsPDF library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.22/jspdf.plugin.autotable.min.js"></script>
+<script>
+// A4 210x297
+const { jsPDF } = window.jspdf;
+const doc = new jsPDF();
+var width = doc.getTextWidth('MONSIEUR LE CAÏD CHEF 4éme ANNEXE ADMINISTRATIVE');
+console.log(width);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const dataList = JSON.parse(localStorage.getItem('dataList')) || []; // Retrieve stored data
+    const dataTableBody = document.getElementById('dataTableBody');
+
+    // Populate the table with data
+    dataList.forEach((item, index) => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>${item.cin}</td>
+            <td>${item.date}</td>
+            <td>${item.time}</td>
+            <td>${item.observations}</td>
+            <td>
+                <button class="editButton" data-index="${index}">Edit</button>
+                <button class="deleteButton" data-index="${index}">Sup</button>
+            </td>
+        `;
+        dataTableBody.appendChild(row);
+    });
+
+    document.getElementById('telechargerButton').addEventListener('click', function() {
+
+        function startingw(text) {
+            return 105 - (doc.getTextWidth(text) / 2);
+        }
+
+        // Add the header text from the second image
+        doc.setFont('helvetica', 'italic');
+        doc.setFontSize(12);
+        doc.text('Royaume Du Maroc', 10, 20);
+        doc.text('Ministère De L\'intérieur', 10, 25);
+        doc.text('Wilaya région de Draa-Tafilalet', 10,30);
+        doc.text('Province D\'Er-Rachidia', 10, 35);
+        doc.text('Pachalik D\'Er-Rachidia', 10, 40);
+        doc.text('4 éme Annexe Administrative', 10, 45);
+        doc.text('N° ...... /DAI', 10, 50);
+        
+        doc.text('Er-Rachidia :..../..../......', 150, 20);
+
+        // Add text from the first image
+        let text1 = 'MONSIEUR LE CAÏD CHEF 4éme ANNEXE ADMINISTRATIVE';
+        let text2 = 'OULED EL HAJ';
+        let text3 = 'A';
+        let text4 = 'MONSIEUR LE PACHA DE LA VILLE D\'ERRACHIDIA';
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(12);
+        doc.text(text1, startingw(text1), 70);
+        doc.text(text2, startingw(text2), 75);
+        doc.text(text3, startingw(text3), 82);
+        doc.text(text4, startingw(text4), 90);
+
+        doc.line(startingw(text1), 71, startingw(text1) + doc.getTextWidth(text1), 71);
+        doc.line(startingw(text2), 76, startingw(text2) + doc.getTextWidth(text2), 76);
+        doc.line(startingw(text4), 91, startingw(text4) + doc.getTextWidth(text4), 91);
+
+
+        // Add introductory text
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(12);
+       
+        
+        
+        doc.text('      Suite à votre message n "300 du 23/04/2024 concernant la situation des', 10, 100);
+        doc.text('registres (Dossiers déposés) stop.', 10, 105);
+        doc.text('  Honneur vous rendre compte les renseignements demandé stop à savoir stop.', 10, 115);
+
+        if(localStorage.getItem("dataList") !== null){
+            doc.autoTable({
+                theme: 'grid',
+                headStyles : {fillColor: '#FFFFFF', textColor: [0, 0, 0], lineWidth: 0.1, lineColor: [0, 0, 0], halign: 'center'}, 
+                styles: {lineWidth: 0.1, lineColor: [0, 0, 0], textColor: [0, 0, 0], halign: 'center'},
+                alternateRowStyles: {fillColor : [255, 255, 255]}, 
+                tableLineColor: [0, 0, 0],
+                tableLineWidth: 0.1,
+                head: [['Nom & Prénom', 'CIN', 'Date', 'Heure', 'Observations']],
+                body: dataList.map(item => [item.name, item.cin, item.date, item.time, item.observations]),
+                startY: 120 // Starting y position for the table
+            });
+        } else {
+            doc.autoTable({
+                headStyles : {fillColor: '#FFFFFF', textColor: [0, 0, 0], lineWidth: 0.1, lineColor: [0, 0, 0], halign: 'center'}, 
+                styles: {halign: 'center', textColor: [0, 0, 0], fontStyle: 'bold'},
+                alternateRowStyles: {fillColor : [255, 255, 255]}, 
+                tableLineColor: [0, 0, 0],
+                tableLineWidth: 0.1,
+                head: [['Nom & Prénom', 'CIN', 'Date', 'Heure', 'Observations']],
+                body: [['', '', "", '', ''], ['', '', "Etat néant", '', ''], ['', '', "", '', '']],
+                startY: 120 // Starting y position for the table
+            });
+        }
+
+        // Save the PDF
+        doc.save('4 ANNEX OULED EL HAJ.pdf');
+    });
+
+    document.getElementById('clearTable').addEventListener('click', function() {
+        console.log("Clearing the table and local storage."); // Debugging statement
+        localStorage.removeItem('dataList');
+        dataTableBody.innerHTML = ''; // Clearing the table
+    });
+
+    // Edit and Delete functionality
+    dataTableBody.addEventListener('click', function(event) {
+        const target = event.target;
+        const index = target.getAttribute('data-index');
+
+        if (target.classList.contains('editButton')) {
+            const item = dataList[index];
+            const newName = prompt('Enter new name:', item.name);
+            const newCIN = prompt('Enter new CIN:', item.cin);
+            const newDate = prompt('Enter new date:', item.date);
+            const newTime = prompt('Enter new time:', item.time);
+            const newObservations = prompt('Enter new observations:', item.observations);
+
+            if (newName && newCIN && newDate && newTime && newObservations) {
+                dataList[index] = {
+                    name: newName,
+                    cin: newCIN,
+                    date: newDate,
+                    time: newTime,
+                    observations: newObservations
+                };
+                localStorage.setItem('dataList', JSON.stringify(dataList));
+                location.reload(); // Refresh the page to reflect changes
+            }
+        } else if (target.classList.contains('deleteButton')) {
+            if (confirm('Are you sure you want to delete this entry?')) {
+                dataList.splice(index, 1);
+                localStorage.setItem('dataList', JSON.stringify(dataList));
+                location.reload(); // Refresh the page to reflect changes
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
